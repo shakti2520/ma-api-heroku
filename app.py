@@ -4,17 +4,16 @@ from flask_restful import Api, Resource, abort, reqparse, fields, marshal_with
 from pickle import load
 import json
 import numpy as np
+from flask_cors import CORS
 
 
 app = Flask(__name__)
 api = Api(app)
 
-
-################################################ Key Table Class ###########################
-
+cors = CORS(app)
 
 ########################################## Importing model #########################
-maModel = load(open("MaModel94", 'rb'))
+maModel = load(open("MaModel", 'rb'))
 
 ################################################ Defining arguments that must be passes #############################
 modelArgs = reqparse.RequestParser()
@@ -30,7 +29,7 @@ modelArgs.add_argument(
 modelArgs.add_argument(
     "cigsPerDay", type=float, help="cigsPerDay value is required. Please refer to the documentation", required=True)
 modelArgs.add_argument(
-    "BPMeds", type=float, help="BPMeds value is required. Please refer to the documentation", required=True)
+    "BPMeds", type=int, help="BPMeds value is required. Please refer to the documentation", required=True)
 modelArgs.add_argument(
     "prevalentStroke", type=int, help="prevalentStroke value is required. Please refer to the documentation", required=True)
 modelArgs.add_argument(
@@ -118,4 +117,4 @@ def Home():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
