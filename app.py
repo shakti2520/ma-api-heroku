@@ -90,6 +90,36 @@ class Model(Resource):
                       "error": "Please check the values passed. Please refer to the documentation."}
             result = json.dumps(result, cls=NumpyEncoder)
             return result, 400
+    def post(self):
+        args = modelArgs.parse_args()
+        try:
+            v1 = int(args['sex'])
+            v2 = int(args['age'])
+            v3 = float(args['education'])
+            v4 = int(args['currentSmoker'])
+            v5 = float(args['cigsPerDay'])
+            v6 = float(args['BPMeds'])
+            v7 = int(args['prevalentStroke'])
+            v8 = int(args['prevalentHyp'])
+            v9 = int(args['diabetes'])
+            v10 = float(args['sysBP'])
+            v11 = float(args['diaBP'])
+            v12 = float(args['BMI'])
+            v13 = int(args['heartRate'])
+            v14 = float(args['glucose'])
+            response = maModel.predict(
+                [[v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14]])
+            result = {"status": 200,
+                      "request URL": request.url,
+                      "prediction": response[0]}
+            result = json.dumps(result, cls=NumpyEncoder)
+            return result, 200
+        except:
+            result = {"status": 400,
+                      "request URL": request.url,
+                      "error": "Please check the values passed. Please refer to the documentation."}
+            result = json.dumps(result, cls=NumpyEncoder)
+            return result, 400
 
 
 api.add_resource(Model, '/predict')
