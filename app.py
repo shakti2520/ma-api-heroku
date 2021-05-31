@@ -112,6 +112,7 @@ def Home():
               <h1 style="color: tomato">MA API.</h1>
               <p>Thanks for visiting.</p>
               <p>For further information refer to the documnentation.</p>
+              <a href="https://ma-api-documentation.herokuapp.com/">https://ma-api-documentation.herokuapp.com/</a>
               </div>
               </div>'''
 
